@@ -1,0 +1,12 @@
+// layouts
+@use "../layouts/document";
+
+@use "../../Shared/css/template/base/abstracts/position";
+
+@include document.new;
+
+iframe {
+    @include position.center-absolute;
+    width: 100%;
+    height: 100%;
+}

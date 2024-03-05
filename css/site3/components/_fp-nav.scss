@@ -1,0 +1,42 @@
+$select: ".fp-nav" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// components
+@use "Shared/css/template/dtm/components/fp-nav";
+
+@mixin base {
+    @include fp-nav.new;
+
+    @media all and (min-width: queries.get(document-mobile-portrait)) {
+        @include fp-nav.hide;
+    }
+
+    #{$select} {
+        font-size: 1.5em;
+
+        &__a {
+            background: colors.get(secondary);
+            align-items: center;
+
+            &:hover,
+            &:focus {
+                background: colors.get(secondary-dark);
+            }
+
+            &--order {
+                background: colors.get(primary);
+
+                &:hover,
+                &:focus {
+                    background: colors.get(primary-dark);
+                }
+            }
+        }
+
+        @content;
+    }
+}

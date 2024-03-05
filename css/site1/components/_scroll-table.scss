@@ -1,0 +1,36 @@
+$select: ".scroll-table" !default;
+
+// config
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+        overflow: auto;
+
+        @media all and (max-width: queries.get(document-desktop)) {
+            box-shadow: inset 0 0 1em white, inset 1em 1em 1em white,
+                inset -0.5em 0 1.5em rgb(0 0 0 / 25%);
+        }
+
+        & &__table {
+            overflow: scroll;
+
+            width: calc(100% - 2px);
+            // min-width: calc(queries.get(document-desktop) - 2rem);
+
+            margin-left: 1px;
+        }
+
+        th {
+            background: inherit;
+            color: currentColor;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        @content;
+    }
+}

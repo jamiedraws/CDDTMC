@@ -1,0 +1,63 @@
+$select: ".footer" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// components
+@use "../../../Shared/css/template/base/components/list";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    #{$select} {
+        overflow: hidden;
+
+        text-align: center;
+
+        nav {
+            @include list.structure($offset: 0);
+
+            @media all and (max-width: queries.get(document-mobile-portrait)) {
+                @include list.convert-to-grid($width: 11em) {
+                    > * {
+                        display: block;
+                        text-align: left;
+                    }
+                }
+            }
+
+            @media all and (min-width: queries.get(document-mobile-portrait)) {
+                @include list.inline;
+            }
+        }
+
+        a {
+            text-align: left;
+
+            &:not(:hover):not(:focus) {
+                text-decoration: none;
+            }
+        }
+
+        button {
+            color: inherit;
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+
+        .onetrust-privacy,
+        .onetrust-privacy * {
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        @content;
+    }
+}

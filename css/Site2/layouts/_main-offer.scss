@@ -1,0 +1,139 @@
+$select: ".main-offer" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/group";
+@use "Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    $gap-from-nav: 5rem;
+
+    #{$select} {
+        margin-top: -#{$gap-from-nav};
+
+        background: radial-gradient(
+            colors.get(secondary-medium),
+            colors.get(secondary-darker)
+        );
+
+        &__in {
+            overflow: hidden;
+
+            padding-bottom: 3rem;
+        }
+
+        &__group {
+            @include group.contain(1.5rem);
+        }
+
+        &__content {
+            flex-basis: queries.em(600);
+            align-self: flex-end;
+
+            @include copy.separate;
+        }
+
+        &__picture {
+            flex-basis: queries.em(800);
+
+            margin-bottom: 0;
+        }
+
+        &__title {
+            font-size: fonts.em(38);
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        &__price {
+            color: colors.get(primary);
+            font: fonts.em(82) / 1 fonts.get(primary);
+        }
+
+        &__shipping {
+            color: colors.get(primary);
+            font: fonts.em(39) / 1 fonts.get(primary);
+            margin-bottom: 0.25em;
+            align-self: center;
+        }
+
+        &__text {
+            font-size: fonts.em(28);
+            line-height: 1;
+
+            margin: 2rem 0;
+
+            b {
+                text-transform: uppercase;
+                color: colors.get(primary);
+                font: 2em/0.5 fonts.get(primary);
+            }
+        }
+
+        @media all and (min-width: queries.set(1210)) {
+            padding-top: #{$gap-from-nav};
+
+            &__picture {
+                margin-left: -17em;
+            }
+        }
+
+        @media all and (max-width: queries.set(1210)) {
+            padding-top: #{$gap-from-nav};
+
+            &__offer {
+                flex-basis: 100%;
+
+                @include group.contain(1rem);
+                justify-content: center;
+                margin: 0;
+            }
+
+            &__text {
+                flex-basis: 100%;
+
+                text-align: center;
+            }
+
+            &__picture {
+                order: -1;
+            }
+        }
+
+        @media all and (max-width: queries.set(960)) {
+            &__title {
+                max-width: 10em;
+            }
+
+            &__price {
+                line-height: 1.1;
+            }
+        }
+
+        @media all and (max-width: queries.set(550)) {
+            &__offer {
+                font-size: 2.75vw;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin present-header-first {
+    #{$select} {
+        &--present-header-first {
+            #{$select} {
+                &__in {
+                    padding-bottom: 1rem;
+                }
+            }
+
+            @content;
+        }
+    }
+}

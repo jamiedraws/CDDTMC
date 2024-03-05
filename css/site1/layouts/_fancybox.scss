@@ -1,0 +1,23 @@
+$select: ".fancybox" !default;
+
+@mixin base {
+    #{$select} {
+        @content;
+    }
+
+    @include cvv;
+}
+
+@mixin cvv {
+    #{$select} {
+        &-container--cvv {
+            #{$select} {
+                &-content {
+                    max-width: 25em;
+                }
+            }
+
+            @content;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+$select: ".review" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        &__quote {
+            font-size: fonts.em(30);
+        }
+
+        &__title {
+            text-transform: uppercase;
+            font: 2.2em / 1 fonts.get(primary);
+            color: colors.get(primary);
+        }
+
+        &__author {
+        }
+
+        @content;
+    }
+}

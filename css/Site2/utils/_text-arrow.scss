@@ -1,0 +1,40 @@
+$select: ".text-arrow" !default;
+
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "../abstracts/background";
+
+@mixin base {
+    #{$select} {
+        padding: 0.5em 1.5em;
+
+        @include background.color-map(colors.get(secondary), white);
+
+        position: relative;
+
+        &::after {
+            $length: 1.25em;
+
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: calc(-#{$length} * 2);
+
+            border-style: solid;
+            border-width: #{$length};
+
+            border-left-color: colors.get(secondary);
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+
+            transform: translate(-3%, -2%);
+        }
+
+        @content;
+    }
+}

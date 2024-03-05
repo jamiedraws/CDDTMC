@@ -1,0 +1,26 @@
+$select: ".icon" !default;
+
+// abstracts
+@use "Shared/css/template/base/abstracts/icons";
+
+@mixin base {
+    @include icons.new;
+
+    #{$select} {
+        stroke-linecap: square;
+
+        @content;
+    }
+}
+
+@mixin combobox {
+    #{$select} {
+        &--combobox {
+            transform: rotate(0.75turn);
+
+            fill: currentColor;
+
+            @content;
+        }
+    }
+}

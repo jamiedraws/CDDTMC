@@ -1,0 +1,15 @@
+$select: ".payment" !default;
+
+// components
+@use "Shared/css/template/dtm/components/payment-icons";
+
+@mixin base {
+    @include payment-icons.new;
+    @include payment-icons.form;
+
+    #{$select} {
+        font-size: 1em;
+
+        @content;
+    }
+}

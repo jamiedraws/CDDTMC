@@ -1,0 +1,56 @@
+$select: ".button" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+
+// components
+@use "Shared/css/template/base/components/button";
+
+@mixin base {
+    @include button.new(colors.get(primary), white);
+
+    #{$select} {
+        font: 900 fonts.em(23) / 1.5 fonts.get(secondary);
+        text-transform: uppercase;
+
+        border-radius: 1.4em;
+        overflow: hidden;
+
+        > span {
+            position: relative;
+            top: 0.1em;
+        }
+
+        &__icon {
+            align-self: center;
+            fill: currentColor;
+        }
+
+        @content;
+    }
+}
+
+@mixin arrow {
+    #{$select} {
+        &--arrow {
+            @include button.color-map(colors.get(secondary), white);
+
+            > span {
+                margin-right: 1em;
+            }
+
+            #{$select} {
+                &__icon {
+                    transform: rotate(0.5turn);
+
+                    &[data-button-icon-position="down"] {
+                        transform: rotate(0.75turn);
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}

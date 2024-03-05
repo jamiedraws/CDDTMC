@@ -1,0 +1,55 @@
+$select: ".description-list" !default;
+
+@use "./../config/colors";
+@use "./../config/fonts";
+@use "./../config/queries";
+
+// abstracts
+@use "Shared/scss/templates/base/abstracts/group";
+@use "Shared/scss/templates/base/abstracts/background";
+
+@mixin base {
+    #{$select} {
+        font-size: fonts.em(20);
+        position: relative;
+        padding: 1rem;
+
+        max-width: 20em;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include background.color-map(
+            $background-color: colors.get(secondary),
+            $text-color: white
+        ) {
+        }
+
+        border: solid colors.get(base);
+        border-width: 0.1rem;
+        box-shadow: 0 0 3em rgba(0, 0, 0, 0.5);
+
+        &__group {
+            @include group.contain(0.25rem);
+            justify-content: center;
+        }
+
+        dt {
+            flex-basis: 6em;
+            text-align: right;
+        }
+
+        dd {
+            flex-basis: 6em;
+            text-align: left;
+        }
+
+        dt + dd {
+            &::before {
+                content: ":";
+                margin-right: 0.5rem;
+            }
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,93 @@
+// layouts
+@use "../layouts/content";
+@use "../layouts/main-offer";
+@use "../layouts/slide";
+@use "../layouts/legal";
+
+// components
+@use "../components/callout-price";
+@use "../components/icon-text";
+@use "../components/picture-card-caption";
+@use "../components/stats-info";
+@use "../components/list";
+@use "../components/table";
+@use "../components/accordion";
+@use "../components/card";
+@use "../components/scroll-table";
+@use "./../components/chart";
+@use "./../components/description-list";
+
+// utils
+@use "../utils/contain";
+@use "../utils/background-image";
+@use "../utils/shadow-text";
+
+@mixin base {
+    // components
+    @include card.base;
+
+    // layouts
+    @include content.base;
+    @include legal.base;
+
+    @content;
+}
+
+@mixin post-base {
+    // layouts
+    @include content.faq;
+
+    @content;
+}
+
+@mixin index {
+    // layouts
+    @include main-offer.base;
+    @include slide.base;
+    @include slide.picstrip;
+    @include slide.carousel;
+
+    @include content.down-with-care;
+    @include content.product-info;
+    @include content.cool-woods;
+    @include content.stats;
+    @include content.customer-reviews;
+    @include content.sub-page;
+
+    // components
+    @include callout-price.base;
+    @include icon-text.base;
+    @include picture-card-caption.base;
+    @include stats-info.base;
+    @include list.base;
+    @include description-list.base;
+
+    // utils
+    @include background-image.base;
+    @include shadow-text.base;
+    @include contain.base;
+
+    @content;
+}
+
+@mixin faq {
+    // components
+    @include accordion.base;
+
+    @content;
+}
+
+@mixin ingredients {
+    // components
+    @include chart.base;
+    @include scroll-table.base;
+
+    @content;
+}
+
+@mixin how-to-use {
+    // layouts
+    @include content.how-to-use;
+
+    @content;
+}

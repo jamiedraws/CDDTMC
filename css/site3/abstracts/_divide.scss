@@ -1,0 +1,42 @@
+@mixin bar($color: currentColor) {
+    display: block;
+
+    height: 0.25rem;
+    width: 100%;
+
+    margin: 1rem auto;
+
+    background: $color;
+
+    @content;
+}
+
+@mixin bar-before($color: currentColor) {
+    &::before {
+        content: "";
+
+        @include bar($color) {
+            @content;
+        }
+    }
+}
+
+@mixin bar-after($color: currentColor) {
+    &::after {
+        content: "";
+
+        @include bar($color) {
+            @content;
+        }
+    }
+}
+
+@mixin bar-before-after($color: currentColor) {
+    @include bar-before($color);
+    @include bar-after($color);
+
+    &::before,
+    &::after {
+        @content;
+    }
+}

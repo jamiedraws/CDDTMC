@@ -1,0 +1,16 @@
+$select: ".background" !default;
+
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "../abstracts/background";
+
+@mixin base {
+    #{$select} {
+        @include background.color-map(white, colors.get(base));
+
+        @content;
+    }
+}

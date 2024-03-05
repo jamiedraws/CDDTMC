@@ -1,0 +1,20 @@
+$select: ".accordion" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// components
+@use "Shared/css/template/base/components/accordion";
+
+@mixin base {
+    @include accordion.base;
+
+    #{$select} {
+        &__button {
+            word-break: break-word;
+        }
+        @content;
+    }
+}

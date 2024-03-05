@@ -1,0 +1,25 @@
+@use "sass:map";
+
+@forward "Shared/css/template/base/config/units";
+
+$list: (
+    base: (
+        roboto,
+        Helvetica,
+        sans-serif
+    ),
+    primary: (
+        railroad-gothic-atf,
+        Impact,
+        sans-serif
+    ),
+    secondary: (
+        termina,
+        Helvetica,
+        sans-serif
+    )
+);
+
+@function get($name) {
+    @return map.get($list, $name);
+}

@@ -1,0 +1,71 @@
+$select: ".header" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// components
+@use "../../../Shared/css/template/base/components/skip-link";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    @include skip-link.new;
+
+    #{$select} {
+        @include background.color-map(
+            $background-color: colors.get(secondary-light),
+            $text-color: colors.get(secondary)
+        );
+
+        font-weight: 500;
+        text-transform: uppercase;
+
+        &__group {
+            @include group.contain;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        &__callout {
+            flex-shrink: 0;
+        }
+
+        &__title {
+            padding-left: 1rem;
+        }
+
+        &__action {
+            flex-shrink: 0;
+
+            font-size: 0.5em;
+        }
+
+        @media all and (min-width: queries.get(document-mobile-portrait)) {
+            &__callout {
+                margin-left: 1.5rem;
+            }
+        }
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            font-size: 0.75rem;
+
+            &__action {
+                display: none;
+            }
+
+            &__in {
+                padding: 0.5em;
+                font-size: 3.3vw;
+            }
+        }
+
+        @content;
+    }
+}

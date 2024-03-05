@@ -1,0 +1,63 @@
+$select: ".legal" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/copy";
+
+%title {
+    font: 600 fonts.em(40) / 1 fonts.get(primary);
+    color: colors.get(primary);
+}
+
+%separate {
+    @include copy.separate;
+}
+
+@mixin base {
+    #{$select} {
+        @extend %separate;
+
+        > ol {
+            @include copy.separate(3rem);
+
+            margin-top: 3rem;
+        }
+
+        ol {
+            @extend %separate;
+        }
+
+        ul {
+            @extend %separate;
+        }
+
+        li {
+            @extend %separate;
+
+            > h3:first-child {
+                text-decoration: underline;
+            }
+        }
+
+        address {
+            font-style: italic;
+        }
+
+        h2 {
+            @extend %title;
+        }
+
+        &__main-list {
+            > *::before {
+                @extend %title;
+                margin-right: 0.25em;
+            }
+        }
+
+        @content;
+    }
+}

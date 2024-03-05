@@ -1,0 +1,32 @@
+@use "sass:math";
+
+$select: ".contain" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// media
+@use "Shared/css/template/base/media/contain";
+
+@mixin base {
+    @include contain.new;
+
+    #{$select} {
+        &--video {
+            @include contain.ratio(math.div(16, 9));
+            background: colors.get(base);
+        }
+
+        &--square {
+            @include contain.ratio(math.div(1, 1));
+        }
+
+        &--picstrip {
+            @include contain.ratio(math.div(641, 478));
+        }
+
+        @content;
+    }
+}

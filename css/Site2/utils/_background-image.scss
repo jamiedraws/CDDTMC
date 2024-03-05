@@ -1,0 +1,16 @@
+$select: ".background-image" !default;
+
+// abstracts
+@use "../abstracts/background";
+
+@mixin base {
+    #{$select} {
+        @include background.image-container;
+
+        &__image {
+            @include background.image-background;
+        }
+
+        @content;
+    }
+}

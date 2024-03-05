@@ -1,0 +1,12 @@
+// interfaces
+@use "interfaces/form";
+@use "interfaces/dtm";
+
+@include dtm.base {
+    @include dtm.page;
+    @include dtm.express-checkout;
+
+    @include form.base {
+        @include form.checkout;
+    }
+}

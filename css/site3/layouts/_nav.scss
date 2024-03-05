@@ -1,0 +1,92 @@
+$select: ".nav" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// layouts
+@use "../../../Shared/css/template/base/layouts/nav" with (
+    $colors: (
+        text: white,
+        background: transparent,
+        button-open: currentColor,
+        button-close: colors.get(secondary)
+    ),
+    $mq: (
+        container-min: 100000px,
+        container-max: 99999px
+    )
+);
+
+// abstracts
+@use "../abstracts/background";
+
+@mixin base {
+    @include nav.new {
+        transition: 0.3s ease-in-out;
+        box-shadow: none;
+
+        &__in {
+            padding: 0;
+        }
+    }
+
+    @include nav.bar {
+        &__logo {
+            display: none;
+        }
+
+        &__link {
+            padding: 1em;
+        }
+
+        &__logo {
+            font-size: 0.5em;
+        }
+    }
+
+    @include nav.drawer {
+        @include background.highlighter(
+            colors.get(secondary),
+            colors.get(secondary)
+        );
+
+        &__logo {
+            font-size: 0.5em;
+        }
+
+        &--is-fixed {
+            background: white;
+            color: colors.get(secondary);
+
+            box-shadow: 0 0 1.25em rgb(0 0 0 / 35%);
+        }
+
+        &__pane {
+            color: colors.get(secondary);
+        }
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            &__group > &__label {
+                order: -1;
+                margin-left: 0.5em;
+            }
+
+            &:not(&--is-end-page) &__group > &__logo {
+                margin-left: auto;
+            }
+
+            &__pane {
+                left: auto;
+
+                -webkit-transform: translateX(103%);
+                transform: translateX(103%);
+            }
+        }
+    }
+
+    #{$select} {
+        @content;
+    }
+}

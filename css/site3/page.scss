@@ -1,0 +1,11 @@
+// interfaces
+@use "interfaces/page";
+
+@include page.base {
+    @include page.index;
+    @include page.faq;
+    @include page.ingredients;
+    @include page.how-to-use;
+}
+
+@include page.post-base;

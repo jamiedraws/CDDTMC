@@ -1,0 +1,28 @@
+$select: ".stats-info" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "../abstracts/divide";
+
+@mixin base {
+    #{$select} {
+        &__text {
+            font-size: fonts.em(18);
+
+            @include divide.bar-after(colors.get(secondary-light));
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__number {
+            font: 4.5em/1 fonts.get(primary);
+        }
+
+        @content;
+    }
+}

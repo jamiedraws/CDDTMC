@@ -1,0 +1,60 @@
+// layouts
+@use "../layouts/main-offer";
+@use "../layouts/form";
+@use "../layouts/fancybox";
+
+// components
+@use "../components/validation-summary-errors" as vse;
+@use "../components/payment-icons";
+@use "../components/validate";
+@use "../components/braintree";
+@use "../components/order-table";
+@use "../components/offer-details";
+@use "../components/offer-group";
+@use "../components/offer-picture";
+@use "./../components/banner";
+@use "./../components/form-title";
+
+// utils
+@use "../utils/icon";
+@use "Shared/css/template/dtm/utils/scope";
+
+@mixin base {
+    @content;
+}
+
+@mixin checkout {
+    // layouts
+    @include main-offer.base;
+    @include main-offer.present-header-first;
+
+    @include form-title.base;
+
+    @include form.base;
+    @include form.frame;
+    @include form.inline-combobox-label;
+    @include form.inline-combobox;
+
+    @include fancybox.base;
+
+    // components
+    @include vse.base;
+    @include validate.base;
+
+    @include scope.for-template {
+        @include braintree.base;
+        @include braintree.alias;
+    }
+
+    @include order-table.base;
+    @include offer-details.base;
+    @include offer-group.base;
+    @include offer-picture.base;
+
+    @include banner.base;
+
+    // utils
+    @include icon.combobox;
+
+    @content;
+}

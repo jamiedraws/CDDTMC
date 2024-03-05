@@ -1,0 +1,27 @@
+$select: ".order-table" !default;
+
+// components
+@use "Shared/css/template/base/components/order-table" with (
+    $select: $select
+);
+
+@mixin base {
+    @include order-table.new;
+    @include order-table.item-grid {
+        tbody {
+            td {
+                &:first-child {
+                    @include order-table.span-item-grid-row;
+                }
+
+                &:not(:first-child) {
+                    @include order-table.flex-item-grid-row;
+                }
+            }
+        }
+    }
+
+    #{$select} {
+        @content;
+    }
+}

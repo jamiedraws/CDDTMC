@@ -1,0 +1,35 @@
+$select: ".validation-summary-errors" !default;
+
+// components
+@use "Shared/css/template/shoppingcart/components/validation-summary-errors"
+    with (
+    $select: $select
+);
+
+// abstracts
+@use "Shared/css/template/base/abstracts/position";
+@use "../abstracts/background";
+
+@mixin base {
+    @include validation-summary-errors.new;
+
+    #{$select} {
+        position: relative;
+
+        @include background.color-map(white, #c00);
+
+        > * {
+            padding: 1rem;
+        }
+
+        span {
+            margin: 0;
+        }
+
+        ul {
+            margin-left: 1rem;
+        }
+
+        @content;
+    }
+}

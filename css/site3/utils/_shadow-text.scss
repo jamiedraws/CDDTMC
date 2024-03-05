@@ -1,0 +1,26 @@
+$select: ".shadow-text" !default;
+
+// abstracts
+@use "../abstracts/inner-shadow";
+@use "Shared/css/template/base/abstracts/position";
+
+@mixin base {
+    #{$select} {
+        position: relative;
+
+        &::before {
+            content: "";
+
+            @include position.center-absolute;
+            @include inner-shadow.radial(white) {
+                opacity: 0.5;
+            }
+        }
+
+        &__text {
+            position: relative;
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,87 @@
+$select: ".offer-picture" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/group";
+@use "Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        font-size: 0.65em;
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+            > * {
+                margin: 0.25rem;
+            }
+        }
+
+        &__picture {
+            flex-basis: queries.em(463);
+
+            margin-bottom: 0;
+
+            @media all and (min-width: queries.get(document-desktop)) {
+                margin: 0 -2em;
+            }
+        }
+
+        &__offer {
+            flex-basis: 23em;
+        }
+
+        &__title {
+            font-size: fonts.em(34);
+            font-weight: bold;
+            line-height: 1.2;
+
+            color: colors.get(secondary);
+        }
+
+        &__price {
+            color: colors.get(primary);
+            font: fonts.em(82) / 1 fonts.get(primary);
+        }
+
+        &__shipping {
+            color: colors.get(secondary);
+            font: fonts.em(40) / 1 fonts.get(primary);
+        }
+
+        &__text {
+            font-size: fonts.em(28);
+            line-height: 1;
+
+            margin: 2rem 0;
+
+            b {
+                text-transform: uppercase;
+                color: colors.get(primary);
+                font: 2em/0.5 fonts.get(primary);
+            }
+        }
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            &__group {
+                font-size: 1.8vw;
+            }
+            &__offer {
+                flex: 1 1 42vw;
+            }
+            &__picture {
+                flex: 0 1 42vw;
+                align-self: flex-end;
+            }
+            &__text {
+                font-size: 2em;
+            }
+        }
+
+        @content;
+    }
+}

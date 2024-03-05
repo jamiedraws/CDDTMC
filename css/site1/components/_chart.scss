@@ -1,0 +1,24 @@
+$select: ".chart" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/chart";
+
+@mixin base {
+    #{$select} {
+        @include chart.structure;
+        @include chart.inline-grid;
+
+        td {
+            &:last-child {
+                width: 40%;
+            }
+        }
+
+        @content;
+    }
+}

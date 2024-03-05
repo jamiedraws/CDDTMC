@@ -1,0 +1,23 @@
+$select: ".offer-details" !default;
+
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/copy";
+@use "../abstracts/background";
+
+@mixin base {
+    #{$select} {
+        @include background.color-map(white, colors.get(base));
+
+        padding: 2rem;
+        border: 1px solid;
+        text-align: left;
+
+        @include copy.separate;
+
+        @content;
+    }
+}

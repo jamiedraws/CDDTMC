@@ -1,0 +1,70 @@
+$select: ".picture-card-caption" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "../abstracts/background";
+
+@mixin base {
+    #{$select} {
+        position: relative;
+
+        &__caption {
+            position: absolute;
+            bottom: 1.4em;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+            width: 23em;
+            height: 10em;
+
+            @media all and (max-width: 30rem) {
+                height: 11em;
+            }
+
+            @media not all and (min-resolution: 0.001dpcm) {
+                height: 11em;
+
+                @media all and (max-width: 30rem) {
+                    height: 12em;
+                }
+            }
+
+            color: white;
+
+            font-family: fonts.get(primary);
+            text-transform: uppercase;
+            line-height: 0.9;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            span {
+                &:first-child {
+                    font-size: fonts.em(42);
+                }
+
+                &:last-child {
+                    font-size: fonts.em(63);
+                    line-height: 0.8;
+                }
+            }
+
+            em {
+                font-style: normal;
+                font-size: fonts.em(68);
+            }
+
+            @media all and (max-width: 30rem) {
+                font-size: 3.5vw;
+            }
+        }
+
+        @content;
+    }
+}

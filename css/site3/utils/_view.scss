@@ -1,0 +1,84 @@
+$select: ".view" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// utils
+@use "Shared/css/template/base/utils/view" with (
+    $breakpoint: queries.get(document-desktop)
+);
+
+@mixin base {
+    @include view.new {
+        &__target {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: -1em;
+                outline: 1px solid black;
+                opacity: 0;
+            }
+        }
+
+        &__anchor:target ~ &__route-target &__target {
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    @include view.set-anchor-position(
+        $static-amount: #{queries.rem(83)},
+        $dynamic-amount: #{queries.rem(83)}
+    );
+
+    @include view.zero-anchor-position("[data-viewport]");
+
+    #{$select} {
+        @content;
+    }
+}
+
+@mixin header-nav {
+    #{$select} {
+        &--header-nav {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+
+            transition: transform 0.3s ease-in-out;
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+
+    @include view.set-anchor-position(
+        $static-amount: #{queries.rem(153)},
+        $dynamic-amount: #{queries.rem(150)}
+    );
+}
+
+@mixin is-hidden {
+    #{$select} {
+        &--is-hidden {
+            transform: translateY(-100%);
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}

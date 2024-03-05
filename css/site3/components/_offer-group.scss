@@ -1,0 +1,42 @@
+$select: ".offer-group" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/group";
+@use "Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        position: relative;
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+        }
+
+        &__content {
+            flex-basis: 34em;
+        }
+
+        &__offer {
+            flex-basis: 16em;
+            align-self: center;
+
+            @include copy.separate;
+        }
+
+        @media all and (max-width: queries.set(1060)) {
+            &__offer {
+                text-align: center;
+
+                flex-basis: 100%;
+            }
+        }
+
+        @content;
+    }
+}

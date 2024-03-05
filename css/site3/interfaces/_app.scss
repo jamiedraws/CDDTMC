@@ -1,0 +1,56 @@
+// layouts
+@use "../layouts/document";
+@use "../layouts/header";
+@use "../layouts/nav";
+@use "../layouts/footer";
+
+// components
+@use "Shared/css/template/base/components/skip-link";
+@use "Shared/css/template/base/components/link";
+
+@use "../components/button";
+@use "../components/fp-nav";
+@use "../components/logo-text";
+@use "../components/social";
+
+// utils
+@use "../utils/text-arrow";
+@use "../utils/icon";
+@use "../utils/background";
+@use "../utils/view";
+
+@mixin critical {
+    // layouts
+    @include document.base;
+    @include header.base;
+    @include nav.base;
+    @include footer.base;
+
+    // utils
+    @include text-arrow.base;
+    @include icon.base;
+    @include background.base;
+    @include view.base;
+    @include view.header-nav;
+    @include view.is-hidden;
+
+    // components
+    @include skip-link.new;
+    @include link.base;
+    @include button.base;
+    @include button.arrow;
+    @include fp-nav.base;
+    @include logo-text.base;
+    @include social.base;
+
+    // hide extra "do not display my personal information"
+    .optanon-toggle-display.hide {
+        display: none;
+    }
+
+    @content;
+}
+
+@mixin defer {
+    @content;
+}

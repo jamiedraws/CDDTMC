@@ -1,0 +1,50 @@
+$select: ".icon-text" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/group";
+@use "Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        picture {
+            max-width: 3em;
+            margin: auto;
+        }
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+            flex-wrap: nowrap;
+
+            @media all and (max-width: queries.set(500)) {
+                font-size: 3.3vw;
+            }
+        }
+
+        &__figure {
+            flex-basis: 10em;
+
+            @include copy.separate;
+        }
+
+        &__row {
+            flex-basis: 100%;
+        }
+
+        &__text {
+            text-transform: uppercase;
+            margin: 2rem;
+        }
+
+        &__button {
+            font-size: 0.75em;
+        }
+
+        @content;
+    }
+}

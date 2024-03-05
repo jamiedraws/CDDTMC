@@ -1,0 +1,37 @@
+$select: ".table" !default;
+
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+
+        border-collapse: collapse;
+        
+        th,
+        td {
+            font-size: 1em;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+        }
+
+        thead {
+            tr {
+                th {
+                    background: colors.get(primary);
+                    font-weight: bold;
+                }
+                &:first-of-type {
+                    th {
+                        background: colors.get(secondary);
+                        color: white;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    
+        @content;
+    }
+}

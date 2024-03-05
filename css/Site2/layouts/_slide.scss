@@ -1,0 +1,104 @@
+$select: ".slide" !default;
+
+// config
+@use "../config/queries";
+
+// layouts
+@use "Shared/css/template/shoppingcart/layouts/slide" with (
+    $select: $select
+);
+
+@mixin base {
+    @include slide.new;
+
+    #{$select} {
+        &__item {
+        }
+
+        @content;
+    }
+}
+
+@mixin picstrip {
+    #{$select} {
+        &--picstrip {
+            #{$select} {
+                &__into {
+                    justify-content: flex-start;
+
+                    @media all and (max-width: queries.get(document-mobile-portrait)) {
+                        flex-wrap: wrap;
+                    }
+                }
+
+                &__item {
+                    max-width: 100%;
+
+                    @media all and (min-width: queries.get(document-mobile-portrait)) {
+                        max-width: calc(100% / 2);
+                    }
+
+                    @media all and (min-width: queries.set(1000)) {
+                        max-width: calc(100% / 3);
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin carousel {
+    #{$select} {
+        &--carousel {
+            #{$select} {
+                $length: 30em;
+                $offset: 20em;
+
+                &__into {
+                    max-width: #{$length};
+                    width: calc(100% - #{$offset});
+                    margin: auto;
+                }
+
+                &__nav {
+                    max-width: calc(#{$length} + #{$offset});
+                    width: 100%;
+                    height: auto;
+
+                    align-items: center;
+                }
+
+                &__button {
+                    $size: 1.75em;
+
+                    border: 0.1em solid;
+                    border-radius: 100%;
+
+                    width: #{$size};
+                    height: #{$size};
+
+                    &:hover,
+                    &:focus {
+                        background: currentColor;
+                    }
+                }
+
+                &__icon {
+                    color: #6d6e70;
+                }
+            }
+
+            @media all and (max-width: slide.$desktop) {
+                font-size: 2vw;
+
+                @include slide.overlay-nav-buttons {
+                    justify-content: space-between;
+                }
+            }
+
+            @content;
+        }
+    }
+}

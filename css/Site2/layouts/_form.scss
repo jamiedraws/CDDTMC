@@ -1,0 +1,299 @@
+$select: ".form" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "Shared/css/template/base/layouts/form";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/group";
+@use "Shared/css/template/base/abstracts/copy";
+@use "../abstracts/background";
+
+@mixin base {
+    @include form.new;
+
+    @include form.fieldset;
+    @include form.field-label;
+    @include form.select;
+    @include form.checkbox;
+
+    #{$select} {
+        z-index: 1;
+
+        &__header {
+            text-align: center;
+            color: colors.get(accent);
+        }
+
+        &__title {
+            flex: 1 1 100%;
+
+            padding: 0.5em;
+            @include background.color-map(
+                $background-color: colors.get(primary),
+                $text-color: colors.get(secondary)
+            );
+
+            text-align: left;
+            line-height: 1;
+            font-size: fonts.em(20);
+        }
+
+        &__group {
+            @include group.contain;
+            @include group.flexchild(1 1 12em);
+        }
+
+        &__payment-icons {
+            justify-content: flex-start;
+
+            > img {
+                max-width: 37px;
+            }
+        }
+
+        &--select &__button {
+            width: 3em;
+        }
+
+        &__group-section {
+            @include group.contain(1em);
+            @include group.flexchild(1 1 23em);
+        }
+
+        &__group,
+        &__group-section {
+            overflow: visible;
+        }
+
+        &__span-item {
+            flex: 1 1 100%;
+        }
+
+        &__message {
+            text-align: center;
+        }
+
+        &__fieldset {
+            align-items: center;
+            justify-content: space-between;
+            flex-basis: 100%;
+        }
+
+        &__item-input-label {
+            flex: 0 1 auto;
+        }
+
+        &__field-label {
+            font-size: 16px;
+        }
+
+        label,
+        &__field {
+            font-size: inherit;
+        }
+
+        &__field {
+            padding: 0.5em;
+        }
+
+        &__cvv {
+            align-items: center;
+        }
+
+        &__cvv &__field {
+            flex-basis: 10em;
+        }
+
+        &__cvv &__link {
+            font-size: 1em;
+        }
+
+        &__copy {
+            @include copy.separate;
+        }
+
+        &__checkbox-label-attention {
+            display: inline-block;
+        }
+
+        &__checkbox-label-attention &__label {
+            border: 1px solid colors.get(accent);
+            padding: 1em 1.5em;
+
+            align-items: center;
+        }
+
+        &__action {
+            margin-top: 2rem;
+        }
+
+        &__action + &__copy {
+            max-width: 50em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        &__action-text {
+            text-align: center;
+        }
+
+        &__submit:not([data-state="card"]) > &__button {
+            display: none;
+        }
+
+        &__submit {
+            &:not([data-state="card"]) {
+                > svg {
+                    display: none;
+                }
+            }
+
+            &[data-state="card"] {
+                > img {
+                    display: none;
+                }
+            }
+        }
+
+        &__ssl > img {
+            margin: auto;
+        }
+
+        &__info-accordion > :first-child {
+            margin-bottom: 2rem;
+        }
+
+        &__button {
+            font-size: 1em;
+        }
+
+
+        &__offer-details {
+            order: 1;
+        }
+
+        label[for="zc"] {
+            margin: 0;
+
+            > input {
+                border-radius: 0;
+                padding: 0.5em;
+            }
+        }
+
+        &__field-label-button {
+            @include group.contain;
+            align-items: center;
+            overflow: visible;
+
+            max-width: 40em;
+            margin: auto;
+
+            input {
+                flex: 1 1 10em;
+            }
+
+            button {
+                flex-basis: 12em;
+                align-self: stretch;
+
+                font-size: 1em;
+            }
+
+            [role="alert"] {
+                flex-basis: 100%;
+                text-align: center;
+            }
+
+            @media all and (max-width: queries.get(document-mobile-portrait)) {
+                label,
+                button {
+                    flex-basis: 100%;
+                }
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin inline-combobox-label {
+    #{$select} {
+        &--inline-combobox-label {
+            label {
+                flex: 0 1 auto;
+
+                &:not(:first-of-type) {
+                    order: 0;
+                    flex: 1;
+                }
+            }
+
+            #{$select} {
+                &__field-label {
+                    @include group.contain;
+                    justify-content: flex-start;
+                    align-items: center;
+                }
+
+                &--select {
+                    flex: 0 1 6em;
+                }
+
+                &__button {
+                    flex: 0 0 auto;
+                }
+
+                @media all and (max-width: queries.set(1060)) {
+                    &__field-label {
+                        justify-content: center;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin inline-combobox {
+    #{$select} {
+        &--inline-combobox {
+            #{$select} {
+                &__contain {
+                    display: inline-flex;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin frame {
+    #{$select} {
+        &--frame {
+            outline: 1px solid;
+
+            @include background.color-map(white, colors.get(base));
+
+            #{$select} {
+                &__fieldset {
+                    @include group.gutter(0);
+                    overflow: hidden;
+                }
+
+                &__frame {
+                    padding: 1rem;
+                }
+            }
+
+            @content;
+        }
+    }
+}

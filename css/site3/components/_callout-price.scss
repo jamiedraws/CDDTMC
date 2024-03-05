@@ -1,0 +1,78 @@
+$select: ".callout-price" !default;
+
+// config
+@use "../config/colors";
+@use "../config/fonts";
+@use "../config/queries";
+
+// abstracts
+@use "Shared/css/template/base/abstracts/group";
+@use "Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        font-family: fonts.get(primary);
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__callout {
+            font-weight: 500;
+            font-size: fonts.em(57);
+            line-height: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            b {
+                font-size: 1.6em;
+                line-height: 0.9;
+            }
+        }
+
+        &__offer {
+
+        }
+
+        &__price {
+            color: colors.get(primary);
+            font-size: fonts.em(100);
+            line-height: 1;
+
+            transform: translateY(10%);
+        }
+
+        &__shipping {
+            color: colors.get(primary);
+            font-size: fonts.em(45);
+            text-indent: 0.2em;
+            line-height: 1;
+            margin-bottom: 0.5em;
+        }
+
+        @media all and (min-width: queries.set(900)) {
+            &__group {
+                @include group.gutter(2rem);
+            }
+
+            &__button {
+                flex-basis: 100%;
+            }
+        }
+
+        @media all and (max-width: queries.set(900)) {
+            &__callout {
+                flex-basis: 100%;
+            }
+        }
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            font-size: 2.5vw;
+        }
+
+        @content;
+    }
+}

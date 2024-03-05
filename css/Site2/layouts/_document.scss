@@ -1,0 +1,105 @@
+@use "sass:map";
+@use "sass:math";
+
+$sizes: (
+    desktop: 72.5rem,
+    base-font: 1
+);
+
+// utils
+@use "Shared/css/template/base/utils/unit-conversion" as convert with (
+    $base: map.get($sizes, base-font)
+);
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "Shared/css/template/base/layouts/document";
+
+@use "Shared/css/template/base/layouts/section" with (
+    $container: map.get($sizes, desktop),
+    $frame: 1rem
+);
+
+// components
+@use "Shared/css/template/base/components/list";
+
+// utils
+@use "Shared/css/template/dtm/utils/scope";
+
+// themes
+@use "Shared/css/template/base/themes/background";
+
+@mixin base {
+    @include document.base;
+
+    @include scope.get-root {
+        scroll-behavior: smooth;
+
+        font-size: #{map.get($sizes, base-font)}rem;
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            font-size: clamp(
+                #{math.div(map.get($sizes, base-font), 2)}rem,
+                3.5vw,
+                #{map.get($sizes, base-font)}rem
+            );
+        }
+    }
+
+    @include scope.for-template {
+        font: fonts.rem(16) fonts.get(base);
+        line-height: 1.45;
+        color: colors.get(base);
+
+        @include background.color-map(colors.get(secondary-darker), white);
+    }
+
+    h1 {
+        font-size: fonts.rem(40);
+    }
+
+    h2,
+    legend {
+        font-size: fonts.rem(40);
+    }
+
+    h3 {
+        font-size: fonts.rem(25);
+    }
+
+    a[href^="mailto:"] {
+        word-break: break-all;
+    }
+
+    // ol {
+    //     list-style: decimal;
+    // }
+
+    input {
+        line-height: inherit;
+    }
+
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    sup {
+        bottom: 0.75em;
+    }
+
+    @include section;
+}
+
+@mixin section {
+    @include section.new {
+        &__frame {
+            padding: #{section.$frame};
+        }
+    }
+}

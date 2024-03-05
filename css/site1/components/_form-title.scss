@@ -1,0 +1,38 @@
+$select: ".form-title" !default;
+
+@use "./../config/queries";
+
+@mixin base {
+    #{$select} {
+        
+        text-align: center;
+        margin-bottom: 0 !important;
+        
+        &__not-available {
+            display: block;
+            font-family: 'railroad-gothic-atf';
+            font-size: 2.8em;
+            letter-spacing: 0.02em;
+            line-height: 1;
+            @media all and (max-width: queries.get(document-mobile-portrait)) {
+                font-size: 3.2em;
+            }
+        }
+        
+        &__fill-out {
+            display: block;
+            font-size: 1.3em;
+        }
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            font-size: 1.9vw;
+
+            &__fill-out {
+                max-width: 18em;
+                margin: 0 auto;
+            }
+        }
+    
+        @content;
+    }
+}

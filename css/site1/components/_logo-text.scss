@@ -1,0 +1,19 @@
+$select: ".logo-text" !default;
+
+// config
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+        &__group {
+            display: block;
+        }
+
+        &__logo {
+            width: 6em;
+            height: 6em;
+        }
+
+        @content;
+    }
+}

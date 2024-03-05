@@ -1,0 +1,19 @@
+$select: ".list" !default;
+
+// config
+@use "../config/colors";
+
+// components
+@use "Shared/css/template/base/components/list";
+
+@mixin base {
+    @include list.new;
+
+    #{$select} {
+        &--stack {
+            @include list.circle($size: 0.5em, $color: colors.get(primary));
+        }
+
+        @content;
+    }
+}
